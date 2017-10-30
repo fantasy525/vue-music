@@ -13,43 +13,13 @@
 </template>
 
 <script>
-  import jsonp from 'jsonp'
   import SingerDetail from './singer-detail.vue'
-
-  const commonParams = { // 通用的请求参数
-    g_tk: 5381,
-    inCharset: 'utf-8',
-    outCharset: 'utf-8',
-    notice: 0,
-    format: 'jsonp'
-  }
-  const urlData = Object.assign({}, commonParams, {
-    channel: 'singer',
-    page: 'list',
-    key: 'cn_woman_all',
-    pagesize: 100,
-    pagenum: 1,
-    hostUin: 0,
-    needNewCode: 0,
-    paltform: 'yqq'
-  })
-
-  const options = {
-    param: 'jsonpCallback'
-  }
+  import { jsonp } from './util'
 
   /**
    * 解析对象格式的数据为url参数形式
    * **/
-  function parseUrl (url, data) {
-    let params = ''
-    for (let key in data) {
-      params += `&${key}=${data[key]}`
-    }
-    params = params.substring(1)
-    return `${url}?${params}`
-  }
-
+  
   export default {
     data () {
       return {
@@ -60,12 +30,21 @@
     },
     created () {
       let url = 'https://c.y.qq.com/v8/fcg-bin/v8.fcg'
+      let urlData = {
+        channel: 'singer',
+        page: 'list',
+        key: 'cn_woman_all',
+        pagesize: 100,
+        pagenum: 1,
+        hostUin: 0,
+        needNewCode: 0,
+        paltform: 'yqq'
+      }
       this.getLists(url, urlData)
     },
     methods: {
       getLists (url, urlData) {
-        url = parseUrl(url, urlData)
-        jsonp(url, options, (err, res) => {
+        jsonp(url, urlData, (err, res) => {
           if (!err) {
             this.lists = res.data.list
             console.log(res)
