@@ -1,5 +1,14 @@
 import jsonp from 'common/js/jsonp'
-import { commonParams, options } from './config.js'
+const commonParams = {
+  g_tk: 5381,
+  inCharset: 'utf-8',
+  outCharset: 'utf-8',
+  notice: 0,
+  format: 'jsonp'
+}
+const options = {
+  param: 'jsonpCallback'
+}
 // import axios from 'axios'
 export function getSingerList() {
   const url = 'https://c.y.qq.com/v8/fcg-bin/v8.fcg'

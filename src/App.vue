@@ -11,7 +11,7 @@
 <script type='text/ecmascript-6'>
 import MHeader from 'components/m-header/m-header'
 import Tab from 'components/tab/tab'
-import Player from 'components/player/player2'
+import Player from 'components/player/player'
 export default {
   created() {
     console.log('APP实例化')
